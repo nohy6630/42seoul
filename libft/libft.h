@@ -17,10 +17,11 @@ int ft_strlcat(char *, char *, int);
 int ft_toupper(int);
 int ft_tolower(int);
 char *ft_strchr(const char *, int);
-int ft_ strncmp(const char *, const char *, int);
-//----여기부터 작성해애ㅑ됨--
-void *memchr(const void *, int, int);
-int memcmp(const void *, const void *, int);
-char *strnstr(const char *, const char *, int);
-int atoi(const char *);
+int ft_strncmp(const char *, const char *, int);
+void *ft_memchr(const void *, int, int);
+int ft_memcmp(const void *, const void *, int);
+char *ft_strnstr(const char *, const char *, int);
+int ft_atoi(const char *);
+void *ft_calloc(int, int);
+char *ft_strdup(const char *);
 #endif
