@@ -1,19 +1,27 @@
 #include "libft.h"
 
-char *ft_strnstr(const char *s1, const char *s2, int n)
+char *ft_strnstr(const char *big, const char *little, size_t len)
 {
     int i;
-    int len;
+    int j;
+    int llen;
 
     i = 0;
-    len = ft_strlen(s2);
-    if (len == 0)
-        return NULL;
-    while (s1[i] && i <= n - len)
+    llen = ft_strlen(little);
+    if (!llen)
+        return (big);
+    while (big[i] && i + llen <= len)
     {
-        if (ft_strlen(s1 + i) >= len && !ft_memcmp(s1 + i, s2, len))
-            return (s1 + i);
+        j = 0;
+        while (big[i + j] && little[j])
+        {
+            if (big[i + j] != little[j])
+                break;
+            j++;
+        }
+        if (j == llen)
+            return (big + i);
         i++;
     }
-    return NULL;
+    return (NULL);
 }

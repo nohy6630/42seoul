@@ -1,29 +1,33 @@
 #include "libft.h"
 
-void *ft_memmove(void *dest, const void *src, int n)
+void *ft_memmove(void *dst, const void *src, size_t len)
 {
     char *dp;
     char *sp;
     char *buf;
     int i;
 
-    dp = dest;
+    if (!dst && !src)
+        return (NULL);
+    dp = dst;
     sp = src;
-    buf = malloc(sizeof(char) * n);
-    i = 0;
-    while (i < n)
+    if (dp > sp) // 겹쳤을 때를 대비해 안겹친 부분부터 복사하기 위함
     {
-        buf[i] = sp[i];
-        i++;
+        i = len - 1;
+        while (i >= 0)
+        {
+            dp[len] = sp[len];
+            i--;
+        }
     }
-    i = 0;
-    while (i < n)
+    else
     {
-        dp[i] = buf[i];
-        i++;
+        i = 0;
+        while (i < len)
+        {
+            dp[len] = sp[len];
+            i++;
+        }
     }
-    free(buf);
-    return dest;
+    return (dst);
 }
-// memmove는 복사할 내용을 임시공간에 저장했다 dest에 넣는것이 memcpy와의 차이점?
-// https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=sharonichoya&logNo=220510332768
