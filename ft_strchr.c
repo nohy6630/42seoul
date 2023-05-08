@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/09 08:00:28 by yenoh             #+#    #+#             */
+/*   Updated: 2023/05/09 08:39:51 by yenoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    int i;
-    int len;
+	int	i;
+	int	len;
 
-    i = 0;
-    len = ft_strlen(s);
-    while (i <= len) // 맨 뒤 널문자도 포함해서 탐색해야 함
-    {
-        if (s[i] == c)
-            return (s + i);
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	len = ft_strlen(s);
+	while (i <= len)
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
 }
+/*맨 뒤  널문자도  포함해서  탐색해야함*/
