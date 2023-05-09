@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 07:43:58 by yenoh             #+#    #+#             */
-/*   Updated: 2023/05/09 07:44:55 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/05/09 10:17:05 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	ret = 0;
-	while (nptr[i] && ft_isalpha(nptr[i]))
+	while (nptr[i] && ft_isdigit(nptr[i]))
 	{
 		ret = ret * 10 + (nptr[i] - '0');
 		i++;
