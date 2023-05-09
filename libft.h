@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:08:13 by yenoh             #+#    #+#             */
-/*   Updated: 2023/05/09 08:47:32 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/05/09 14:10:47 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
+int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *s);

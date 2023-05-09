@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 08:00:28 by yenoh             #+#    #+#             */
-/*   Updated: 2023/05/09 08:39:51 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/05/09 14:37:29 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-	int	len;
+	long	i;
+	long	len;
 
 	i = 0;
 	len = ft_strlen(s);
 	while (i <= len)
 	{
-		if (s[i] == c)
+		if ((unsigned char)s[i] == (unsigned char)c)
 			return ((char *)s + i);
 		i++;
 	}

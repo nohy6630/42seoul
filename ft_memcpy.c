@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 07:53:24 by yenoh             #+#    #+#             */
-/*   Updated: 2023/05/09 08:36:32 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/05/09 13:50:51 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t len)
 	char	*sp;
 	size_t	i;
 
+	if (!dst && !src)
+		return (NULL);
 	dp = dst;
 	sp = (char *)src;
 	i = 0;
