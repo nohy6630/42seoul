@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 15:30:24 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/20 16:43:38 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 12:01:38 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -22,27 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strdup(const char *str)
-{
-	char	*ret;
-	int		i;
-	int		len;
-
-	len = ft_strlen(str);
-	ret = malloc(len + 1);
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		ret[i] = str[i];
-		i++;
-	}
-	ret[i] = 0;
-	return (ret);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*ret;
 	int		i;
@@ -65,6 +45,42 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ret[i] = s2[j];
 		i++;
 		j++;
+	}
+	ret[i] = 0;
+	return (ret);
+}
+
+char	*ft_strchr(char *s, int c)
+{
+	long	i;
+	long	len;
+
+	i = 0;
+	len = ft_strlen(s);
+	while (i <= len)
+	{
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_strdup(char *str)
+{
+	char	*ret;
+	int		i;
+	int		len;
+
+	len = ft_strlen(str);
+	ret = malloc(len + 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		ret[i] = str[i];
+		i++;
 	}
 	ret[i] = 0;
 	return (ret);

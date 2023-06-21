@@ -6,58 +6,81 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:53:41 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/20 17:10:37 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/21 12:36:47 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#ifndef BUFFER_SIZE 
-# define BUFFER_SIZE 1024
-#endif
-
-int	get_newline_idx(char *buf)
+char	*init_data(char *data)
 {
-	int	i;
+	char	*ret;
+
+	if (!data)
+	{
+		ret = malloc(1);
+		ret[0] = 0;
+		return (ret);
+	}
+	return (data);
+}
+
+char	*read_data(char *data, int fd)
+{
+	char	buf[BUFFER_SIZE + 1];
+	int		size;
+	char	*tmp;
+
+	while (1)
+	{
+		size = read(fd, buf, BUFFER_SIZE);
+		if (size < 0)
+			return (NULL);
+		buf[size] = 0;
+		data = init_data(data);
+		tmp = ft_strjoin(data, buf);
+		free(data);
+		data = tmp;
+		if (size == 0 || ft_strchr(data, '\n'))
+			break ;
+	}
+	return (data);
+}
+
+char	*get_next_data(char *ret)
+{
+	int		i;
+	char	*data;
 
 	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			return (i);
+	while (ret[i] && ret[i] != '\n')
 		i++;
-	}
-	return (-1);
+	if (ret[i] == '\n')
+		i++;
+	if (!ret[i])
+		data = NULL;
+	else
+		data = ft_strdup(ret + i);
+	ret[i] = 0;
+	return (data);
 }
 
 char	*get_next_line(int fd)
 {
-	char	buf[BUFFER_SIZE + 1];
-	int		size;
-	int		idx;
-	char	*ret;
-	char	*tmp;
+	static char	*data;
+	char		*ret;
 
-	ret = malloc(1);
-	ret[0] = 0;
-	while (1)
+	ret = read_data(data, fd);
+	if (!ret)
 	{
-		size = read(fd, buf, BUFFER_SIZE);
-		if (size <= 0)
-			break ;
-		buf[size] = 0;
-		idx = get_newline_idx(buf);
-		tmp = ret;
-		if (idx != -1)
+		if (data)
 		{
-			buf[idx + 1] = 0;
-			ret = ft_strjoin(ret, buf);
-			free(tmp);
-			break ;
+			free(data);
+			data = NULL;
 		}
-		ret = ft_strjoin(ret, buf);
-		free(tmp);
+		return (NULL);
 	}
+	data = get_next_data(ret);
 	if (ft_strlen(ret) < 1)
 	{
 		free(ret);
