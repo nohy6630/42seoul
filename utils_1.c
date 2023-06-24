@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:25:24 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:10:56 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 10:50:55 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_prints(char *str)
 {
 	int	len;
 
+	if (str == NULL)
+		str = "(null)";
 	len = ft_strlen(str);
 	write(1, str, len);
 	return (len);
