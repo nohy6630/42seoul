@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 01:33:49 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:28:59 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 11:00:15 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_printd(int n)
 	if (n < 0)
 	{
 		write(1, "-", 1);
-		len = ft_printd_recur(n);
+		len = ft_printd_recur(-n);
 		return (len + 1);
 	}
 	len = ft_printd_recur(n);
