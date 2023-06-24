@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 01:56:40 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:18:50 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 10:37:35 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_printx(unsigned int n, char f)
 
 int	ft_print_percent(void)
 {
-	write(1, "%%", 1);
+	write(1, "%", 1);
 	return (1);
 }
 
