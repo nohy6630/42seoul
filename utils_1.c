@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:25:24 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:50:55 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 10:58:33 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ int	ft_prints(char *str)
 
 int	ft_printp_recur(unsigned long n)
 {
-	char	c;
 	int		len1;
 	int		len2;
+	char	*alpha;
 
-	if (n < 10)
+	if (n < 16)
 	{
-		c = '0' + n;
-		write(1, &c, 1);
+		alpha = "0123456789abcdef";
+		write(1, &alpha[n], 1);
 		return (1);
 	}
-	len1 = ft_printp_recur(n / 10);
-	len2 = ft_printp_recur(n % 10);
+	len1 = ft_printp_recur(n / 16);
+	len2 = ft_printp_recur(n % 16);
 	return (len1 + len2);
 }
 
