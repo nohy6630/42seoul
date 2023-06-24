@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:25:21 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:06:00 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 10:28:02 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_print_arg(char f, va_list args)
 {
 	if (f == 'c')
-		return (ft_printc(va_arg(args, char)));
+		return (ft_printc(va_arg(args, int)));
 	if (f == 's')
 		return (ft_prints(va_arg(args, char *)));
 	if (f == 'p')
@@ -36,7 +36,6 @@ int	ft_printf(const char *str, ...)
 	int		len;
 	int		i;
 	va_list	args;
-	int		tmp;
 
 	len = 0;
 	i = 0;
@@ -45,10 +44,8 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i + 1] != '\0' && str[i] == '%')
 		{
-			tmp = ft_print_arg(str[++i]);
-			if (tmp == -1)
-				return (-1);
-			len += tmp;
+			i++;
+			len += ft_print_arg(str[++i], args);
 		}
 		else
 		{
