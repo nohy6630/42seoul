@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:53:41 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/21 12:36:47 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/24 12:01:10 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*init_data(char *data)
 	if (!data)
 	{
 		ret = malloc(1);
+		if (!ret)
+			return (NULL);
 		ret[0] = 0;
 		return (ret);
 	}
@@ -28,7 +30,7 @@ char	*init_data(char *data)
 char	*read_data(char *data, int fd)
 {
 	char	buf[BUFFER_SIZE + 1];
-	int		size;
+	ssize_t	size;
 	char	*tmp;
 
 	while (1)
@@ -38,6 +40,8 @@ char	*read_data(char *data, int fd)
 			return (NULL);
 		buf[size] = 0;
 		data = init_data(data);
+		if (!data)
+			return (NULL);
 		tmp = ft_strjoin(data, buf);
 		free(data);
 		data = tmp;
