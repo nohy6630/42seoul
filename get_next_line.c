@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 14:53:41 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 12:01:10 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:38:57 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*read_data(char *data, int fd)
 		tmp = ft_strjoin(data, buf);
 		free(data);
 		data = tmp;
+		if (!data)
+			return (NULL);
 		if (size == 0 || ft_strchr(data, '\n'))
 			break ;
 	}
