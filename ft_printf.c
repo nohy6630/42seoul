@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:25:21 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/24 10:42:18 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/27 16:08:20 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,53 @@ int	ft_print_arg(char f, va_list args)
 	return (0);
 }
 
+int	ft_print(const char *str, int *len, int *i, va_list args)
+{
+	int	ret;
+
+	if (str[(*i) + 1] != '\0' && str[*i] == '%')
+	{
+		(*i)++;
+		ret = ft_print_arg(str[*i], args);
+		if (ret == -1)
+			return (-1);
+		(*len) += ret;
+	}
+	else
+	{
+		ret = write(1, &str[*i], 1);
+		if (ret == -1)
+			return (-1);
+		(*len)++;
+	}
+	return (1);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		len;
 	int		i;
 	va_list	args;
+	int		ret;
 
 	len = 0;
 	i = 0;
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i + 1] != '\0' && str[i] == '%')
+		ret = ft_print(str, &len, &i, args);
+		if (ret == -1)
 		{
-			i++;
-			len += ft_print_arg(str[i], args);
-		}
-		else
-		{
-			write(1, &str[i], 1);
-			len++;
+			va_end(args);
+			return (-1);
 		}
 		i++;
 	}
 	va_end(args);
 	return (len);
+}
+
+int main()
+{
+	ft_printf("%d", 10000);
 }
