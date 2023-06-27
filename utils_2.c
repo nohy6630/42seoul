@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 01:33:49 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/27 16:06:54 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/27 16:11:43 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int	ft_printd_recur(int n)
 		return (write(1, &c, 1));
 	}
 	len1 = ft_printd_recur(n / 10);
+	if (len1 == -1)
+		return (-1);
 	len2 = ft_printd_recur(n % 10);
-	if (len1 == -1 || len2 == -1)
+	if (len2 == -1)
 		return (-1);
 	return (len1 + len2);
 }
@@ -61,8 +63,10 @@ int	ft_printu_recur(unsigned int n)
 		return (write(1, &c, 1));
 	}
 	len1 = ft_printu_recur(n / 10);
+	if (len1 == -1)
+		return (-1);
 	len2 = ft_printu_recur(n % 10);
-	if (len1 == -1 || len2 == -1)
+	if (len2 == -1)
 		return (-1);
 	return (len1 + len2);
 }

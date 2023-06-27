@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 23:25:21 by yenoh             #+#    #+#             */
-/*   Updated: 2023/06/27 16:08:20 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/06/27 16:08:43 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,4 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(args);
 	return (len);
-}
-
-int main()
-{
-	ft_printf("%d", 10000);
 }
