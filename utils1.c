@@ -1,80 +1,114 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 21:52:12 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/14 21:59:05 by yenoh            ###   ########.fr       */
+/*   Created: 2023/09/19 21:09:47 by yenoh             #+#    #+#             */
+/*   Updated: 2023/09/19 21:17:43 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_error(char *m)
+size_t	ft_strlen(const char *s)
 {
-	write(2, m, ft_strlen(m));
-	write(2, "\n", 1);
-	exit(1);
-}
-
-static char	**get_env_path(char **envp)
-{
-	char	*path;
-
-	while (ft_strncmp("PATH", *envp, 4))
-		envp++;
-	path = *envp + 5;
-	return (ft_split(path, ':'));
-}
-
-static char	*get_cmd(char **path, char *cmd)
-{
-	int		i;
-	char	*joined_cmd;
-	char	*ret_cmd;
+	size_t	i;
 
 	i = 0;
-	if (access(cmd, X_OK) != -1)
-		return (cmd);
-	joined_cmd = ft_strjoin("/", cmd);
-	while (path[i])
-	{
-		ret_cmd = ft_strjoin(path[i++], joined_cmd);
-		if (access(ret_cmd, X_OK) != -1)
-		{
-			free(joined_cmd);
-			return (ret_cmd);
-		}
-		free(ret_cmd);
-	}
-	free(joined_cmd);
-	return (NULL);
+	while (s[i])
+		i++;
+	return (i);
 }
 
-void	execute(char *cmd, char **envp)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	char	*ret;
 	int		i;
-	char	**paths;
-	char	**cmd_arg;
-	char	*cmd_path;
+	int		j;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	ret = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!ret)
+		return (NULL);
 	i = 0;
-	paths = get_env_path(envp);
-	cmd_arg = ft_split(cmd, ' ');
-	cmd_path = get_cmd(paths, cmd_arg[0]);
-	if (!cmd_path)
+	while (s1[i])
 	{
-		while (paths[i])
-			free(paths[i++]);
-		free(paths);
-		i = 0;
-		while (cmd_arg[i])
-			free(cmd_arg[i++]);
-		free(cmd_arg);
-		ft_error("command error");
+		ret[i] = s1[i];
+		i++;
 	}
-	if (execve(cmd_path, cmd_arg, envp) == -1)
-		ft_error("execve error");
+	j = 0;
+	while (s2[j])
+	{
+		ret[i] = s2[j];
+		i++;
+		j++;
+	}
+	ret[i] = 0;
+	return (ret);
+}
+
+void	set_str(const char *str, char c, char **save)
+{
+	int	size;
+	int	i;
+	int	len;
+
+	len = 0;
+	while (str[len] && str[len] != c)
+		len++;
+	size = len + 1;
+	*save = malloc(sizeof(char) * size);
+	i = 0;
+	while (str[i] && str[i] != c)
+	{
+		(*save)[i] = str[i];
+		i++;
+	}
+	(*save)[size - 1] = 0;
+}
+
+int	arr_size(const char *str, char c)
+{
+	int	i;
+	int	size;
+
+	size = 1;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == c)
+			i++;
+		if (str[i])
+			size++;
+		while (str[i] && str[i] != c)
+			i++;
+	}
+	return (size);
+}
+
+char	**ft_split(const char *s, char c)
+{
+	int		size;
+	char	**ret;
+	int		idx;
+
+	idx = 0;
+	size = arr_size(s, c);
+	ret = malloc(sizeof(char *) * size);
+	if (!ret)
+		return (NULL);
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s)
+			set_str(s, c, &ret[idx++]);
+		while (*s && (*s) != c)
+			s++;
+	}
+	ret[size - 1] = 0;
+	return (ret);
 }
