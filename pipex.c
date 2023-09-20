@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:52:16 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/20 22:49:02 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/20 23:29:23 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_func_1(char **av, char **envp)
 	if (pid == 0)
 	{
 		ft_dup_1(av, fd);
-		execute(av[2], envp);
+		execute_cmd(av[2], envp);
 	}
 	if (dup2(fd[0], 0) == -1)
 		ft_error("dup2 error");
@@ -64,7 +64,7 @@ void	ft_func_2(char **av, char **envp)
 			ft_error("open error");
 		if (dup2(outfile, 1) == -1)
 			ft_error("dup2 error");
-		execute(av[3], envp);
+		execute_cmd(av[3], envp);
 	}
 }
 
