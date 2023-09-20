@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:52:12 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/19 21:39:02 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/20 22:50:29 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,19 @@ void	ft_error(char *m)
 	exit(1);
 }
 
-static char	**get_env_path(char **envp)
+int	ft_strncmp(const char *s1, const char *s2, size_t len)
+{
+	size_t	i;
+
+	if (len == 0)
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < len - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+char	**get_paths(char **envp)
 {
 	char	*path;
 
@@ -29,31 +41,31 @@ static char	**get_env_path(char **envp)
 	return (ft_split(path, ':'));
 }
 
-static char	*get_cmd(char **path, char *cmd)
+char	*get_cmd_path(char **path, char *cmd)
 {
 	int		i;
-	char	*joined_cmd;
-	char	*ret_cmd;
+	char	*slash_cmd;
+	char	*ret;
 
 	i = 0;
 	if (access(cmd, X_OK) != -1)
 		return (cmd);
-	joined_cmd = ft_strjoin("/", cmd);
+	slash_cmd = ft_strjoin("/", cmd);
 	while (path[i])
 	{
-		ret_cmd = ft_strjoin(path[i++], joined_cmd);
-		if (access(ret_cmd, X_OK) != -1)
+		ret = ft_strjoin(path[i++], slash_cmd);
+		if (access(ret, X_OK) != -1)
 		{
-			free(joined_cmd);
-			return (ret_cmd);
+			free(slash_cmd);
+			return (ret);
 		}
-		free(ret_cmd);
+		free(ret);
 	}
-	free(joined_cmd);
+	free(slash_cmd);
 	return (NULL);
 }
 
-void	execute(char *cmd, char **envp)
+void	execute_cmd(char *cmd, char **envp)
 {
 	int		i;
 	char	**paths;
@@ -61,9 +73,9 @@ void	execute(char *cmd, char **envp)
 	char	*cmd_path;
 
 	i = 0;
-	paths = get_env_path(envp);
+	paths = get_paths(envp);
 	cmd_arg = ft_split(cmd, ' ');
-	cmd_path = get_cmd(paths, cmd_arg[0]);
+	cmd_path = get_cmd_path(paths, cmd_arg[0]);
 	if (!cmd_path)
 	{
 		while (paths[i])
