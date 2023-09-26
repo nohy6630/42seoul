@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:52:16 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/20 23:29:23 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/27 08:38:27 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	ft_func_2(char **av, char **envp)
 int	main(int ac, char **av, char **envp)
 {
 	int	tmp_fd[2];
+	int	status1;
+	int	status2;
 
 	tmp_fd[0] = dup(0);
 	tmp_fd[1] = dup(1);
@@ -82,6 +84,9 @@ int	main(int ac, char **av, char **envp)
 	dup2(tmp_fd[1], 1);
 	close(tmp_fd[0]);
 	close(tmp_fd[1]);
-	wait(NULL);
-	wait(NULL);
+	wait(&status1);
+	wait(&status2);
+	if (WEXITSTATUS(status1) == 2 || WEXITSTATUS(status2) == 2)
+		return (2);
+	return (0);
 }

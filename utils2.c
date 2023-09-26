@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:52:12 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/20 22:50:29 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/27 08:14:29 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	execute_cmd(char *cmd, char **envp)
 
 	i = 0;
 	paths = get_paths(envp);
-	cmd_arg = ft_split(cmd, ' ');
+	cmd_arg = ft_split_2(cmd, ' ');
 	cmd_path = get_cmd_path(paths, cmd_arg[0]);
 	if (!cmd_path)
 	{

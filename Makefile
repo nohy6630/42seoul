@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-OBJS = pipex.o utils1.o utils2.o
+OBJS = pipex.o utils1.o utils2.o utils3.o
 NAME = pipex
 
 all : $(NAME)
