@@ -6,17 +6,17 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:52:12 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/27 08:14:29 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/28 13:34:24 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_error(char *m)
+void	ft_error(char *m, int code)
 {
 	write(2, m, ft_strlen(m));
 	write(2, "\n", 1);
-	exit(1);
+	exit(code);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t len)
@@ -81,12 +81,15 @@ void	execute_cmd(char *cmd, char **envp)
 		while (paths[i])
 			free(paths[i++]);
 		free(paths);
+		write(2, "pipex: ", 7);
+		write(2, cmd_arg[0], ft_strlen(cmd_arg[0]));
+		write(2, ": ", 2);
 		i = 0;
 		while (cmd_arg[i])
 			free(cmd_arg[i++]);
 		free(cmd_arg);
-		ft_error("command error");
+		ft_error("command not found", 127);
 	}
 	if (execve(cmd_path, cmd_arg, envp) == -1)
-		ft_error("execve error");
+		ft_error("execve error", 1);
 }

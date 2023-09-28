@@ -6,11 +6,22 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:51:57 by yenoh             #+#    #+#             */
-/*   Updated: 2023/09/27 08:22:55 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/09/28 13:32:03 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_error_with_arg(char	*m, char *arg1, char *arg2, int code)
+{
+	write(2, arg1, ft_strlen(arg1));
+	write(2, ": ", 2);
+	write(2, arg2, ft_strlen(arg2));
+	write(2, ": ", 2);
+	write(2, m, ft_strlen(m));
+	write(2, "\n", 1);
+	exit(code);
+}
 
 void	set_str_2(const char *str, char c, char **save)
 {
