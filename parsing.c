@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:36 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/27 22:58:42 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/29 09:00:23 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,6 @@ void	parse_map(t_info *info)
 	load_map(info);
 	check_wall(info);
 	check_map_element(info);
+	if (!check_valid_path(info))
+		perror_free_exit("invalid path error",info);
 }

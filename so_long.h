@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:43 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/27 22:19:42 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/29 09:00:59 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ typedef struct s_info
 	void	*e_img;
 }				t_info;
 
+typedef struct s_dfs
+{
+	int sx;
+	int sy;
+	char **visited;
+	int valid;
+}	t_dfs;
+
 size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
@@ -84,5 +92,7 @@ void			move_left(t_info *info);
 void			move_down(t_info *info);
 void			move_right(t_info *info);
 int				key_press(int key, t_info *info);
+
+int				check_valid_path(t_info *info);
 
 #endif
