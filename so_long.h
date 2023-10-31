@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:43 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/31 14:38:31 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 23:15:21 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ typedef struct s_info
 
 typedef struct s_dfs
 {
-	int sx;
-	int sy;
-	char **visited;
-	int valid;
-	int c_cnt;
+	int		sx;
+	int		sy;
+	char	**visited;
+	int		valid;
+	int		c_cnt;
 }	t_dfs;
 
 size_t			ft_strlen(const char *s);
@@ -93,8 +93,9 @@ void			move_right(t_info *info);
 int				key_press(int key, t_info *info);
 
 int				check_valid_path(t_info *info);
-int 			ft_printd(int n);
+int				ft_printd(int n);
 void			free_info_num(t_info *info, int num);
 void			free_dfs_num(t_dfs *dfsi, int num);
-
+int				check_map_2(int fd, char **linep, t_info *info, int *hp);
+void			init_info_2(t_info *info);
 #endif

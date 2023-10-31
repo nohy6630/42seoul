@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:36 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/31 14:35:32 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 23:09:31 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,12 @@ int	check_map_width_height(t_info *info)
 	if (fd == -1)
 		perror_exit("open error");
 	chk = get_next_line(fd, &line);
-	if(chk == -1)
+	if (chk == -1)
 		perror_exit("gnl error");
 	info->w = ft_strlen(line);
 	h = 1;
 	free(line);
-	while (get_next_line(fd, &line))
-	{
-		if(chk == -1)
-			perror_exit("gnl error");
-		if (info->w != (int)ft_strlen(line))
-		{
-			free(line);
-			return (0);
-		}
-		free(line);
-		h++;
-	}
-	free(line);
-	chk = close(fd);
-	if(chk == -1)
-		perror_exit("close error");
-	if (h <= 2)
+	if (!check_map_2(fd, &line, info, &h))
 		return (0);
 	info->h = h;
 	return (1);
@@ -60,10 +44,10 @@ void	load_map(t_info *info)
 	while (++i < info->h)
 	{
 		chk = get_next_line(info->fd, &info->map[i]);
-		if(chk == -1)
+		if (chk == -1)
 		{
 			free_info_num(info, i);
-			perror_exit("gnl error");			
+			perror_exit("gnl error");
 		}
 	}
 }

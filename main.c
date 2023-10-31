@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:31:09 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/31 14:14:39 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 19:36:21 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int	main(int ac, char **av)
 	mlx_hook(info.win, X_EVENT_KEY_EXIT, 0, &mlx_destroy_exit, &info);
 	mlx_loop(info.mlx);
 	exit(EXIT_SUCCESS);
-	return 0;
+	return (0);
 }

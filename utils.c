@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:50 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/31 14:42:35 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 23:15:10 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	init_info(t_info *info, char *map)
 {
-	int	img_len;
 	int	fd;
 	int	chk;
 
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		perror_exit("close error");
+		perror_exit("open error");
 	chk = close(fd);
 	if (chk == -1)
 		perror_exit("close error");
@@ -31,16 +30,7 @@ void	init_info(t_info *info, char *map)
 	info->e_cnt = 0;
 	info->img_len = 64;
 	info->mlx = mlx_init();
-	info->g_img = mlx_xpm_file_to_image(info->mlx, \
-	"textures/g.xpm", &img_len, &img_len);
-	info->w_img = mlx_xpm_file_to_image(info->mlx, \
-	"textures/w.xpm", &img_len, &img_len);
-	info->p_img = mlx_xpm_file_to_image(info->mlx, \
-	"textures/p.xpm", &img_len, &img_len);
-	info->c_img = mlx_xpm_file_to_image(info->mlx, \
-	"textures/c.xpm", &img_len, &img_len);
-	info->e_img = mlx_xpm_file_to_image(info->mlx, \
-	"textures/e.xpm", &img_len, &img_len);
+	init_info_2(info);
 }
 
 void	free_info(t_info *info)
