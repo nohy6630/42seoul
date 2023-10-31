@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinhokim <jinhokim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 08:45:05 by jinhokim          #+#    #+#             */
-/*   Updated: 2022/09/15 12:44:19 by jinhokim         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:28:06 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	ft_check_newline(char *stack)
+int	ft_check_newline(char *stack)
 {
 	int			i;
 
@@ -26,13 +26,15 @@ static int	ft_check_newline(char *stack)
 	return (-1);
 }
 
-static int	ft_split_stack(char **stack, char **line, int nl_idx)
+int	ft_split_stack(char **stack, char **line, int nl_idx)
 {
 	char		*temp;
 	int			len;
 
 	(*stack)[nl_idx] = '\0';
 	*line = ft_strdup(*stack);
+	if (*line == NULL)
+		return (-1);
 	len = ft_strlen(*stack + nl_idx + 1);
 	if (len == 0)
 	{
@@ -41,12 +43,14 @@ static int	ft_split_stack(char **stack, char **line, int nl_idx)
 		return (1);
 	}
 	temp = ft_strdup(*stack + nl_idx + 1);
+	if (temp == NULL)
+		return (-1);
 	free(*stack);
 	*stack = temp;
 	return (1);
 }
 
-static int	ft_return_all(char **stack, char **line, int ret)
+int	ft_return_all(char **stack, char **line, int ret)
 {
 	int			nl_idx;
 
@@ -65,6 +69,8 @@ static int	ft_return_all(char **stack, char **line, int ret)
 		}
 	}
 	*line = ft_strdup("");
+	if (*line == NULL)
+		return (-1);
 	return (0);
 }
 
@@ -82,6 +88,8 @@ int	get_next_line(int fd, char **line)
 	{
 		buf[ret] = '\0';
 		stack[fd] = ft_strjoin(stack[fd], buf);
+		if (stack[fd] == NULL)
+			return (-1);
 		nl_idx = ft_check_newline(stack[fd]);
 		if (nl_idx >= 0)
 			return (ft_split_stack(&stack[fd], line, nl_idx));

@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:50 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/29 09:57:14 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:42:35 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	init_info(t_info *info, char *map)
 {
 	int	img_len;
 	int	fd;
+	int	chk;
 
 	fd = open(map, O_RDONLY);
 	if (fd == -1)
-		perror_exit("infile error");
-	close(fd);
+		perror_exit("close error");
+	chk = close(fd);
+	if (chk == -1)
+		perror_exit("close error");
 	info->map_path = map;
 	info->move_cnt = 0;
 	info->p_cnt = 0;

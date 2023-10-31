@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:31:05 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/29 09:43:35 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:41:50 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	move_up(t_info *info)
 {
+	int	chk;
+
 	if (info->map[info->y - 1][info->x] == '1')
 		return ;
 	else if (info->map[info->y - 1][info->x] == 'E')
@@ -29,11 +31,15 @@ void	move_up(t_info *info)
 	info->map[info->y - 1][info->x] = 'P';
 	info->move_cnt++;
 	info->y--;
-	printf("move count: %d\n", info->move_cnt);
+	chk = ft_printd(info->move_cnt);
+	if (chk == -1)
+		perror_free_exit("print error", info);
 }
 
 void	move_left(t_info *info)
 {
+	int	chk;
+	
 	if (info->map[info->y][info->x - 1] == '1')
 		return ;
 	else if (info->map[info->y][info->x - 1] == 'E')
@@ -49,11 +55,15 @@ void	move_left(t_info *info)
 	info->map[info->y][info->x - 1] = 'P';
 	info->move_cnt++;
 	info->x--;
-	printf("move count: %d\n", info->move_cnt);
+	chk = ft_printd(info->move_cnt);
+	if (chk == -1)
+		perror_free_exit("print error", info);
 }
 
 void	move_down(t_info *info)
 {
+	int	chk;
+	
 	if (info->map[info->y + 1][info->x] == '1')
 		return ;
 	else if (info->map[info->y + 1][info->x] == 'E')
@@ -69,11 +79,15 @@ void	move_down(t_info *info)
 	info->map[info->y + 1][info->x] = 'P';
 	info->move_cnt++;
 	info->y++;
-	printf("move count: %d\n", info->move_cnt);
+	chk = ft_printd(info->move_cnt);
+	if (chk == -1)
+		perror_free_exit("print error", info);
 }
 
 void	move_right(t_info *info)
 {
+	int	chk;
+
 	if (info->map[info->y][info->x + 1] == '1')
 		return ;
 	else if (info->map[info->y][info->x + 1] == 'E')
@@ -89,7 +103,9 @@ void	move_right(t_info *info)
 	info->map[info->y][info->x + 1] = 'P';
 	info->move_cnt++;
 	info->x++;
-	printf("move count: %d\n", info->move_cnt);
+	chk = ft_printd(info->move_cnt);
+	if (chk == -1)
+		perror_free_exit("print error", info);
 }
 
 int	key_press(int key, t_info *info)

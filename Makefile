@@ -1,7 +1,8 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 OBJS = gnl.o gnl_utils.o draw.o main.o \
-	move.o parsing.o utils.o dfs.o
+	move.o parsing.o utils.o dfs.o \
+	print.o utils2.o
 NAME = so_long
 
 all : $(NAME)

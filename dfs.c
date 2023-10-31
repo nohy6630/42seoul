@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 08:24:12 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/29 09:43:05 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:40:25 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	find_start(t_info *info, t_dfs *dfsi)
 
 void	dfs(t_info *info, t_dfs *dfsi, int x, int y)
 {
-	if (dfsi->valid)
+	if (dfsi->valid && dfsi->c_cnt <= 0)
 		return ;
 	if (x < 0 || x >= info->w || y < 0 || y >= info->h)
 		return ;
@@ -46,6 +46,8 @@ void	dfs(t_info *info, t_dfs *dfsi, int x, int y)
 		dfsi->valid = 1;
 		return ;
 	}
+	else if (info->map[y][x] == 'C')
+		dfsi->c_cnt--;
 	dfs(info, dfsi, x - 1, y);
 	dfs(info, dfsi, x + 1, y);
 	dfs(info, dfsi, x, y - 1);
@@ -58,9 +60,18 @@ void	init_visited(t_info *info, t_dfs *dfsi)
 	int	j;
 
 	dfsi->visited = (char **)malloc(sizeof(char *) * info->h);
+	if (dfsi->visited == NULL)
+		perror_free_exit("malloc error", info);
 	i = -1;
 	while (++i < info->h)
+	{
 		dfsi->visited[i] = (char *)malloc(sizeof(char) * info->w);
+		if (dfsi->visited == NULL)
+		{
+			free_dfs_num(dfsi, i);
+			perror_free_exit("malloc error", info);
+		}
+	}
 	i = -1;
 	while (++i < info->h)
 	{
@@ -76,6 +87,7 @@ int	check_valid_path(t_info *info)
 	int		i;
 
 	dfsi.valid = 0;
+	dfsi.c_cnt = info->c_cnt;
 	init_visited(info, &dfsi);
 	find_start(info, &dfsi);
 	dfs(info, &dfsi, dfsi.sx, dfsi.sy);
@@ -83,5 +95,5 @@ int	check_valid_path(t_info *info)
 	while (++i < info->h)
 		free(dfsi.visited[i]);
 	free(dfsi.visited);
-	return (dfsi.valid);
+	return (dfsi.valid && dfsi.c_cnt <= 0);
 }

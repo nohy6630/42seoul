@@ -6,15 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:43 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/29 09:00:59 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:38:31 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "../mlx/mlx.h"
@@ -60,6 +58,7 @@ typedef struct s_dfs
 	int sy;
 	char **visited;
 	int valid;
+	int c_cnt;
 }	t_dfs;
 
 size_t			ft_strlen(const char *s);
@@ -94,5 +93,8 @@ void			move_right(t_info *info);
 int				key_press(int key, t_info *info);
 
 int				check_valid_path(t_info *info);
+int 			ft_printd(int n);
+void			free_info_num(t_info *info, int num);
+void			free_dfs_num(t_dfs *dfsi, int num);
 
 #endif

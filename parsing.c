@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:30:36 by yenoh             #+#    #+#             */
-/*   Updated: 2023/10/29 09:46:06 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:35:32 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,21 @@ int	check_map_width_height(t_info *info)
 	int		fd;
 	char	*line;
 	int		h;
+	int		chk;
 
 	fd = open(info->map_path, O_RDONLY);
-	get_next_line(fd, &line);
+	if (fd == -1)
+		perror_exit("open error");
+	chk = get_next_line(fd, &line);
+	if(chk == -1)
+		perror_exit("gnl error");
 	info->w = ft_strlen(line);
 	h = 1;
 	free(line);
 	while (get_next_line(fd, &line))
 	{
+		if(chk == -1)
+			perror_exit("gnl error");
 		if (info->w != (int)ft_strlen(line))
 		{
 			free(line);
@@ -34,7 +41,9 @@ int	check_map_width_height(t_info *info)
 		h++;
 	}
 	free(line);
-	close(fd);
+	chk = close(fd);
+	if(chk == -1)
+		perror_exit("close error");
 	if (h <= 2)
 		return (0);
 	info->h = h;
@@ -44,11 +53,19 @@ int	check_map_width_height(t_info *info)
 void	load_map(t_info *info)
 {
 	int	i;
+	int	chk;
 
 	i = -1;
 	info->map = (char **)malloc(sizeof(char *) * info->h);
 	while (++i < info->h)
-		get_next_line(info->fd, &info->map[i]);
+	{
+		chk = get_next_line(info->fd, &info->map[i]);
+		if(chk == -1)
+		{
+			free_info_num(info, i);
+			perror_exit("gnl error");			
+		}
+	}
 }
 
 void	check_wall(t_info *info)
@@ -110,6 +127,8 @@ void	parse_map(t_info *info)
 	if (!check_map_width_height(info))
 		perror_exit("rectangular error");
 	info->fd = open(info->map_path, O_RDONLY);
+	if (info->fd == -1)
+		perror_exit("open error");
 	load_map(info);
 	check_wall(info);
 	check_map_element(info);
