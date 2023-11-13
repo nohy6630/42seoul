@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:37:03 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:37:04 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:34:48 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	str_num_count(char **nums_str)
+int	str_num_count(char **nums_str)
 {
 	int		i;
 	int		j;
@@ -55,7 +55,7 @@ int	get_num_count(int ac, char **av)
 	return (cnt);
 }
 
-static int	check_num_arr(t_info *info, long long ln)
+int	check_num_arr(t_info *info, long long ln)
 {
 	int	i;
 
@@ -68,7 +68,7 @@ static int	check_num_arr(t_info *info, long long ln)
 	return (1);
 }
 
-static void	fill_num_arr(t_info *info, char **nums_str)
+void	fill_num_arr(t_info *info, char **nums_str)
 {
 	int			i;
 	int			check;

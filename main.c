@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:37:52 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:37:52 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:32:52 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_chunk(int len)
+int	get_chunk(int len)
 {
 	if (len < 100)
 		return (15);

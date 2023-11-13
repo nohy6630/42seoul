@@ -6,7 +6,7 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:37:27 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:37:27 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:34:59 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rrr(t_ps *ps)
 	rrb(ps);
 }
 
-static void	print_cmd(int n)
+void	print_cmd(int n)
 {
 	if (n == 0)
 		ft_printf("sa\n");

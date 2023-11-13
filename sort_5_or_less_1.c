@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:36:49 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:36:49 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:34:29 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_3_2(int *arr, t_ps *ps)
+void	sort_3_2(int *arr, t_ps *ps)
 {
 	if (arr[0] < arr[1])
 		cmd_update(ps, 8, rra);

@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:36:35 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:36:36 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:32:47 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	get_stack_idx(t_stack *stack, int n)
+int	get_stack_idx(t_stack *stack, int n)
 {
 	t_node	*tmp;
 	int		i;
@@ -27,15 +27,15 @@ static int	get_stack_idx(t_stack *stack, int n)
 	return (i);
 }
 
-static int	set_rotate(t_ps *ps, int i, int chunk)
+int	set_rotate(t_ps *ps, int i, int chunk)
 {
 	int	min;
 	int	max;
 	int	j;
 	int	t;
 
-	min = 0;
-	max = ps->a->len;
+	max = 0;
+	min = ps->a->len;
 	j = i - 1;
 	while (++j <= i + chunk)
 	{
@@ -75,7 +75,7 @@ void	a_to_b(t_ps *ps, int i, int chunk)
 	}
 }
 
-static void	max_to_top(t_ps *ps)
+void	max_to_top(t_ps *ps)
 {
 	int	max;
 	int	max_idx;

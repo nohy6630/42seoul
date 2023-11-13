@@ -6,13 +6,13 @@
 /*   By: yenoh <yenoh@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:37:19 by yenoh             #+#    #+#             */
-/*   Updated: 2023/11/13 12:37:20 by yenoh            ###   ########.fr       */
+/*   Updated: 2023/11/13 22:33:25 by yenoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_ra_rb(t_ps *ps)
+int	check_ra_rb(t_ps *ps)
 {
 	int		check;
 	t_node	*tmp;
@@ -37,7 +37,7 @@ static int	check_ra_rb(t_ps *ps)
 	return (check);
 }
 
-static int	check_rb_ra(t_ps *ps)
+int	check_rb_ra(t_ps *ps)
 {
 	int		check;
 	t_node	*tmp;
